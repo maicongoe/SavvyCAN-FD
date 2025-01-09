@@ -671,6 +671,7 @@ void GVRetSerial::procRXChar(unsigned char c)
         switch (rx_step)
         {
         case 0:
+            sendDebug("BUILD_CAN_FRAME");   // Maicon Goettert
             buildTimestamp = c;
             break;
         case 1:
@@ -756,6 +757,7 @@ void GVRetSerial::procRXChar(unsigned char c)
         switch (rx_step)
         {
         case 0:
+            sendDebug("BUILD_FD_FRAME");   // Maicon Goettert
             buildTimestamp = c;
             break;
         case 1:
@@ -794,7 +796,9 @@ void GVRetSerial::procRXChar(unsigned char c)
             buildFrame.setFrameId(buildId);
             break;
         case 8:
-            buildData.resize(c & 0x3F);
+            //buildData.resize(c & 0x3F);
+            if (c == 0) buildData.resize(c & 0x3F); // Maicon Goettert
+            if (c > 0) buildData.resize(((c - 1) & 0x3F) + 1); // Maicon Goettert
             break;
         case 9:
             buildFrame.bus = c;
@@ -802,7 +806,7 @@ void GVRetSerial::procRXChar(unsigned char c)
         default:
             if (rx_step < buildData.length() + 10)
             {
-                buildData[rx_step - 9] = c;
+                buildData[rx_step - 10] = c; // buildData[rx_step - 9] = c; (Maicon Goettert)
             }
             else
             {

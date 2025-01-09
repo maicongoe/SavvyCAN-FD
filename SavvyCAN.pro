@@ -15,6 +15,8 @@ CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 CONFIG += c++17
 CONFIG += NO_UNIT_TESTS
 
+CONFIG += qt # Maicon Goettert
+
 DEFINES += QCUSTOMPLOT_USE_OPENGL
 
 TARGET = SavvyCAN
@@ -249,6 +251,9 @@ win32-msvc* {
 win32-g++ {
    LIBS += libopengl32
 }
+
+PREFIX='C:/temp/CAN/SavvyCAN-FD' # Maicon Goettert
+target.path = $$PREFIX/bin
 
 unix {
    isEmpty(PREFIX) {

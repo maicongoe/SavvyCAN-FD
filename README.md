@@ -1,3 +1,10 @@
+########################################################################
+# Gerar executável
+cd C:\temp\CAN\SavvyCAN-FD\release
+C:\Qt\5.15.0\msvc2019_64\bin\windeployqt.exe SavvyCAN.exe
+
+########################################################################
+
 # SavvyCAN
 Qt based cross platform canbus tool
 (C) 2015-2024 Collin Kidder
